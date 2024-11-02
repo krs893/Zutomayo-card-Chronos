@@ -18,7 +18,7 @@
         .slider {
             width: 80%;
             max-width: 600px;
-            margin-bottom: 20px; /* Increase distance from HP fields */
+            margin-bottom: 40px; /* Increase distance from HP fields */
         }
         .slick-prev:before, .slick-next:before {
             color: black;
@@ -31,7 +31,7 @@
         }
         .hp-counter {
             font-size: 24px;
-            margin: 10px; /* Reduce margin to bring closer to center */
+            margin: 20px; /* Increase margin to bring closer to center */
             padding: 10px;
             border: 2px solid #000;
             border-radius: 15px; /* Rounded corners */
@@ -60,15 +60,15 @@
         }
         .hp-images {
             position: absolute;
-            top: -60px; /* Position above the counter */
+            top: -40px; /* Position above the counter */
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 5px;
+            gap: 10px; /* Increase gap between images */
         }
         .hp-images img {
             width: 300px; /* Larger size */
-            height: 80px; /* Larger size */
+            height: 50px; /* Larger size */
         }
         .purple-field {
             width: 100%;
@@ -83,9 +83,9 @@
     </style>
 </head>
 <body>
-<div class="hp-counter" id="hp-counter1" style="top: 20px;">
+<div class="hp-counter" id="hp-counter1" style="top: 10px;"> <!-- Adjusted position -->
     <div class="hp-images" id="hp-images1">
-        <img src="10-10_HP.png" alt="HP Full">
+        <img src="HP_10-10.png" alt="HP Full">
     </div>
     <img src="nira_zutomayo.png" alt="Nira Zutomayo">
     <span>HP: 100</span>
@@ -102,9 +102,9 @@
     <!-- Add more images as needed -->
     <div><img src="18_ZTMY.png" alt="Image 18"></div>
 </div>
-<div class="hp-counter" id="hp-counter2" style="bottom: 20px;">
+<div class="hp-counter" id="hp-counter2" style="bottom: 10px;"> <!-- Adjusted position -->
     <div class="hp-images" id="hp-images2">
-        <img src="10-10_HP.png" alt="HP Full">
+        <img src="HP_10-10.png" alt="HP Full">
     </div>
     <img src="uniguri_zutomayo.png" alt="Uniguri Zutomayo">
     <span>HP: 100</span>
@@ -131,7 +131,7 @@
     function updateHPImages(hp, imagesId) {
         const imagesContainer = document.getElementById(imagesId);
         const image = imagesContainer.querySelector('img');
-        const hpImage = Math.ceil(hp / 10) + '-10_HP.png';
+        const hpImage = 'HP_' + (hp / 10) + '-10.png';
         image.src = hpImage;
     }
 
