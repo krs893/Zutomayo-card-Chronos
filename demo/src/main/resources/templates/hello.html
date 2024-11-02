@@ -9,7 +9,7 @@
         body {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: center; /* Center elements vertically */
             align-items: center;
             height: 100vh;
             margin: 0;
@@ -31,7 +31,7 @@
         }
         .hp-counter {
             font-size: 24px;
-            margin: 20px; /* Increase margin to separate from images */
+            margin: 10px; /* Reduce margin to bring closer to center */
             padding: 10px;
             border: 2px solid #000;
             border-radius: 15px; /* Rounded corners */
@@ -40,19 +40,12 @@
             align-items: center;
             justify-content: space-between;
             width: 300px; /* Make the HP field wider */
+            position: relative;
         }
         .hp-controls {
             display: flex;
             justify-content: space-between;
             width: 100px;
-        }
-        .purple-field {
-            width: 100%;
-            height: 50px;
-            background-color: #5130A0;
-            position: absolute;
-            bottom: 0;
-            left: 0;
         }
         .hp-controls img {
             width: 30px !important; /* Smaller size */
@@ -65,30 +58,59 @@
             height: 30px; /* Adjust size as needed */
             margin-right: 10px; /* Space between image and text */
         }
+        .hp-images {
+            position: absolute;
+            top: -60px; /* Position above the counter */
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+        }
+        .hp-images img {
+            width: 300px; /* Larger size */
+            height: 80px; /* Larger size */
+        }
+        .purple-field {
+            width: 100%;
+            height: 80px;
+            background-color: #fff; /* White background */
+            border: 2px solid #5130A0; /* Purple border */
+            border-radius: 15px; /* Rounded corners */
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
     </style>
 </head>
 <body>
-<div class="hp-counter" id="hp-counter1">
+<div class="hp-counter" id="hp-counter1" style="top: 20px;">
+    <div class="hp-images" id="hp-images1">
+        <img src="10-10_HP.png" alt="HP Full">
+    </div>
     <img src="nira_zutomayo.png" alt="Nira Zutomayo">
     <span>HP: 100</span>
     <div class="hp-controls">
-        <img src="explosion.png" alt="Decrease HP1" onclick="decreaseHP('hp-counter1')">
-        <img src="healing.png" alt="Increase HP1" onclick="increaseHP('hp-counter1')">
+        <img src="explosion.png" alt="Decrease HP1" onclick="decreaseHP('hp-counter1', 'hp-images1')">
+        <img src="healing.png" alt="Increase HP1" onclick="increaseHP('hp-counter1', 'hp-images1')">
     </div>
 </div>
 <div class="slider">
-    <div><img src="image1.jpg" alt="Image 1"></div>
-    <div><img src="image2.jpg" alt="Image 2"></div>
-    <div><img src="image3.jpg" alt="Image 3"></div>
+    <div><img src="0_ZTMY.png" alt="Image 1"></div>
+    <div><img src="1_ZTMY.png" alt="Image 2"></div>
+    <div><img src="2_ZTMY.png" alt="Image 3"></div>
+    <div><img src="3_ZTMY.png" alt="Image 3"></div>
     <!-- Add more images as needed -->
-    <div><img src="image18.jpg" alt="Image 18"></div>
+    <div><img src="18_ZTMY.png" alt="Image 18"></div>
 </div>
-<div class="hp-counter" id="hp-counter2">
+<div class="hp-counter" id="hp-counter2" style="bottom: 20px;">
+    <div class="hp-images" id="hp-images2">
+        <img src="10-10_HP.png" alt="HP Full">
+    </div>
     <img src="uniguri_zutomayo.png" alt="Uniguri Zutomayo">
     <span>HP: 100</span>
     <div class="hp-controls">
-        <img src="explosion.png" alt="Decrease HP2" onclick="decreaseHP('hp-counter2')">
-        <img src="healing.png" alt="Increase HP2" onclick="increaseHP('hp-counter2')">
+        <img src="explosion.png" alt="Decrease HP2" onclick="decreaseHP('hp-counter2', 'hp-images2')">
+        <img src="healing.png" alt="Increase HP2" onclick="increaseHP('hp-counter2', 'hp-images2')">
     </div>
 </div>
 <div class="purple-field"></div>
@@ -106,21 +128,30 @@
         });
     });
 
-    function decreaseHP(counterId) {
+    function updateHPImages(hp, imagesId) {
+        const imagesContainer = document.getElementById(imagesId);
+        const image = imagesContainer.querySelector('img');
+        const hpImage = Math.ceil(hp / 10) + '-10_HP.png';
+        image.src = hpImage;
+    }
+
+    function decreaseHP(counterId, imagesId) {
         let counter = document.getElementById(counterId).querySelector('span');
         let hp = parseInt(counter.innerText.split(': ')[1]);
         if (hp > 0) {
             hp -= 10;
             counter.innerText = 'HP: ' + hp;
+            updateHPImages(hp, imagesId);
         }
     }
 
-    function increaseHP(counterId) {
+    function increaseHP(counterId, imagesId) {
         let counter = document.getElementById(counterId).querySelector('span');
         let hp = parseInt(counter.innerText.split(': ')[1]);
         if (hp < 100) {
             hp += 10;
             counter.innerText = 'HP: ' + hp;
+            updateHPImages(hp, imagesId);
         }
     }
 </script>
